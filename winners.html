@@ -3,59 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Winners - CryptoHunter</title>
+    <title>CryptoHunter - Win $100 Weekly</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>CryptoHunter  <button id="connect-wallet">  <img class="meta" src="icons/meta.png" alt="icons"></button></h1>
-        <nav>
-          <a href="index.html">Home</a>
-          <a href="winners.html">Winners</a>
-          <a href="rules.html">Rules</a>
-          <a href="contact.html">Contact</a>
-          <a href="video.html">videos</a>
-         
-        </nav>
+  <canvas id="fireworksCanvas"></canvas>
+
+ <!-- rules.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules - CryptoHunter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <!-- Header -->
+ <header>
+    <h1>Try-To-Win  <a href="#" onclick="donateWithMetaMask()" class="donation-button">
+      <img src="icons/meta.png" alt="Donate with MetaMask" class="metamask-icon">
+  </a>
+  
+  </h1>
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="winners.html">🏆 Winners</a>
+    <a href="rules.html">📜 Rules</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="About.html">🚀 About</a>
+</nav>
+
+    <div class="social-icons">
+        <a href="#"><img src="icons/y.png" alt="YouTube"></a>
+        <a href="#"><img src="icons/f.png" alt="Instagram"></a>
+        <a class="insta" href="#"><img src="icons/i.png" alt="Facebook"></a>
+        <a href="#"><img src="icons/x.png" alt="Twitter"></a>
+    </div>
+</header>
+
+    <!-- Winners Section -->
+    <section id="winners">
+        <div class="searchname">
+            <h1>🏆 Winners List</h1>
+            <input type="text" id="searchInput" onkeyup="searchWinners()" placeholder="🔍 Search winners...">
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>👤 Name</th>
+                    <th>📅 Date</th>
+                    <th>💰 Prize</th>
+                    <th>📸 Proof</th>
+                    <th>🎥 Video</th>
+                </tr>
+            </thead>
+            <tbody id="winnersBody">
+                <!-- Winners will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button id="prev-button" onclick="prevPage()">⬅ </button>
+            <span id="page-number">Page 1</span>
+            <button id="next-button" onclick="nextPage()"> ➡</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 CryptoHunter. All rights reserved.</p>
         <div class="social-iconsf">
             <a href="#"><img src="icons/y.png" alt="YouTube"></a>
             <a href="#"><img src="icons/f.png" alt="Instagram"></a>
             <a class="insta" href="#"><img src="icons/i.png" alt="Facebook"></a>
             <a href="#"><img src="icons/x.png" alt="Twitter"></a>
         </div>
-    </header>
-
-    <section id="winners">
-        <h2>Winners List</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Winner</th>
-                    <th>Prize</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2025-03-01</td>
-                    <td>0x1234...abcd</td>
-                    <td>$100</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-      <!-- Footer -->
-      <footer>
-        <p>&copy; 2025 CryptoHunter. All rights reserved.</p>
-        <div class="social-icons">
-          <a href="#"><img src="icons/y.png" alt="YouTube"></a>
-          <a href="#"><img src="icons/f.png" alt="Instagram"></a>
-          <a class="insta" href="#"><img src="icons/i.png" alt="Facebook"></a>
-          <a href="#"><img src="icons/x.png" alt="Twitter"></a>
-        </div>
     </footer>
-    
+  <!-- Fullscreen Image Viewer -->
+<div id="fullScreenImage" class="fullscreen-container" onclick="closeFullScreen()">
+    <img id="fullScreenImg">
+</div>
+
+
     <script src="script.js"></script>
 </body>
 </html>

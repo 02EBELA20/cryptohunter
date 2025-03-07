@@ -11,19 +11,19 @@
 
     <!-- Header -->
     <header>
-        <h1>CryptoHunter    <button id="connectMetaMask">
-          <img class="meta" src="icons/meta.png" alt="MetaMask" width="40">
-      </button>
+        <h1>Try-To-Win  <a href="#" onclick="donateWithMetaMask()" class="donation-button">
+          <img src="icons/meta.png" alt="Donate with MetaMask" class="metamask-icon">
+      </a>
+      
       </h1>
-        <nav>
-          <a href="index.html">Home</a>
-          <a href="winners.html">Winners</a>
-          <a href="rules.html">Rules</a>
-          <a href="contact.html">Contact</a>
-          <a href="video.html">videos</a>
-
-         
-        </nav>
+      <nav>
+        <a href="index.html">🏠 Home</a>
+        <a href="winners.html">🏆 Winners</a>
+        <a href="rules.html">📜 Rules</a>
+        <a href="contact.html">📞 Contact</a>
+        <a href="About.html">🚀 About</a>
+    </nav>
+    
         <div class="social-icons">
             <a href="#"><img src="icons/y.png" alt="YouTube"></a>
             <a href="#"><img src="icons/f.png" alt="Instagram"></a>
@@ -32,24 +32,30 @@
         </div>
     </header>
     
+    
     <!-- Hero Section -->
     <section id="home">
-        <h2>Win $100 Every Week!</h2>
+     
+      <h1 id="amountText" class="animated-text"></h1>
+
         <img src="images/main.webp" alt="Main Picture" class="main-image">
     </section>
 
     <!-- Animated Money Rain -->
     <div class="money-rain"></div>
 
-    <!-- Code Submission Section -->
-    <section id="prize">
-        <h2>Enter the Winning Code</h2>
-        <input type="text" id="code-input" placeholder="Enter Code Here" maxlength="8">
-        <button id="submit-code">Submit Code</button>
-        <p id="code-message"></p>
-    </section>
+  
+    <div class="container">
+      <p class="countdown-title">⏳ Time Left Until the Next Winner Announcement</p>
+      <h2 class="countdown" id="timer">00:00:00</h2>
+       
+      <p class="info"><img class="sub" src="images/subsc3.png"> To participate, you must subscribe to our YouTube channel and leave a comment on the latest video!</p>
+ 
+      <p class="info">🏆 The winner will be announced every day at 10:00 AM (New York Time)</p>
+      <p class="info">💰 **The prize will increase as more subscribers join!**</p>
+      <a href="https://www.youtube.com/c/YOUR_CHANNEL_NAME/videos" class="button"> CLICK TO ENTER</a>
 
-    
+  </div>
     
   
     <!-- Footer -->

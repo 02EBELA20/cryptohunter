@@ -142,3 +142,230 @@ document.addEventListener("DOMContentLoaded", function () {
       updateCarousel();
   });
 });
+
+function countdownTimer() {
+    const now = new Date();
+
+    // 🔹 ნიუ-იორკის დროის (EST/EDT) აღება
+    const options = { timeZone: "America/New_York", hour12: false };
+    const currentNYTime = new Date(
+        now.toLocaleString("en-US", options)
+    );
+
+    let target = new Date(currentNYTime);
+    target.setHours(10, 0, 0, 0); // ნიუ-იორკის დროით 10:00 AM
+
+    // თუ უკვე 10-ს გადაცდა, გადავდივართ მეორე დღეზე
+    if (currentNYTime.getHours() >= 10) {
+        target.setDate(target.getDate() + 1);
+    }
+
+    let diff = target - currentNYTime;
+    let hours = Math.floor(diff / (1000 * 60 * 60));
+    let minutes = Math.floor((diff / (1000 * 60)) % 60);
+    let seconds = Math.floor((diff / 1000) % 60);
+
+    // 🔹 გამოტანა ფორმატით 00:00:00
+    document.getElementById("timer").innerText =
+        `${hours.toString().padStart(2, '0')}:` +
+        `${minutes.toString().padStart(2, '0')}:` +
+        `${seconds.toString().padStart(2, '0')}`;
+}
+
+// ⏳ განახლება ყოველ წამში
+setInterval(countdownTimer, 1000);
+countdownTimer(); // პირველი გაშვება
+
+
+
+
+// Sample winners data
+let winners = [
+    { name: "John Doe", date: "March 7, 2025", prize: "$100", proof: "100lari.png", video: "https://youtu.be/example1" },
+    { name: "Jane Smith", date: "March 8, 2025", prize: "$200", proof: "100lari.png", video: "https://youtu.be/example2" }
+];
+
+// Pagination variables
+let currentPage = 1;
+const winnersPerPage = 30;
+
+// Function to display winners on the page
+function displayWinners() {
+    const winnersBody = document.getElementById("winnersBody");
+    winnersBody.innerHTML = "";
+
+    const startIndex = (currentPage - 1) * winnersPerPage;
+    const endIndex = startIndex + winnersPerPage;
+    const paginatedWinners = winners.slice(startIndex, endIndex);
+
+    paginatedWinners.forEach(winner => {
+        let row = `
+            <tr>
+                <td>${winner.name}</td>
+                <td>${winner.date}</td>
+                <td>${winner.prize}</td>
+                <td><img src="images/${winner.proof}" alt="Proof" class="proof-img" onclick="openFullScreen(this)"></td>
+        <td><a href="${winner.video}" target="_blank" class="video-btn">🎥 Watch</a></td>
+            </tr>
+        `;
+        winnersBody.innerHTML += row;
+    });
+
+    document.getElementById("page-number").innerText = `Page ${currentPage}`;
+}
+
+// Function to add a new winner
+function addWinner(name, date, prize, proof, video) {
+    winners.push({ name, date, prize, proof, video });
+    displayWinners();
+}
+
+// Function to navigate pages
+function nextPage() {
+    if (currentPage * winnersPerPage < winners.length) {
+        currentPage++;
+        displayWinners();
+    }
+}
+
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        displayWinners();
+    }
+}
+// Function to search winners
+function searchWinners() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let winnersBody = document.getElementById("winnersBody");
+    
+    // If search is empty, reset the table
+    if (input === "") {
+        displayWinners();
+        return;
+    }
+
+    let filteredWinners = winners.filter(winner => winner.name.toLowerCase().includes(input));
+
+    // Clear table
+    winnersBody.innerHTML = "";
+
+    // If no results, show message
+    if (filteredWinners.length === 0) {
+        winnersBody.innerHTML = `<tr><td colspan="5">❌ No winners found</td></tr>`;
+        return;
+    }
+
+    // Populate filtered winners
+    filteredWinners.forEach((winner, index) => {
+        let row = `
+            <tr>
+                <td>${index + 1}</td>
+                <td>${winner.name}</td>
+                <td>${winner.date}</td>
+                <td>${winner.prize}</td>
+                <td><img src="images/${winner.proof}" alt="Proof" class="proof-img"></td>
+                <td><a href="${winner.video}" target="_blank" class="video-btn">🎥 Watch</a></td>
+            </tr>
+        `;
+        winnersBody.innerHTML += row;
+    });
+}
+
+
+// Initialize winners on page load
+document.addEventListener("DOMContentLoaded", displayWinners);
+
+// Function to open image in full screen
+function openFullScreen(img) {
+    const fullScreenDiv = document.getElementById("fullScreenImage");
+    const fullScreenImg = document.getElementById("fullScreenImg");
+
+    fullScreenImg.src = img.src;
+    fullScreenDiv.style.display = "flex";
+}
+
+// Function to close full screen image
+function closeFullScreen() {
+    document.getElementById("fullScreenImage").style.display = "none";
+}
+
+
+// წესები
+
+document.addEventListener("DOMContentLoaded", () => {
+    const rules = document.querySelectorAll(".rule-item");
+
+    rules.forEach((rule, index) => {
+        setTimeout(() => {
+            rule.style.animation = "fadeIn 1s ease-in-out";
+        }, index * 300);
+    });
+});
+
+
+// ჩვენს შესახებ
+
+document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById("prizeChart").getContext("2d");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: ["Month 1", "Month 2", "Month 3"],
+            datasets: [{
+                label: "Daily Prize Amount ($)",
+                data: [10, 20, 30],
+                backgroundColor: ["#ffcc00", "#ff6600", "#ff0000"],
+                borderColor: "#fff",
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        color: "#fff",
+                        font: { size: 14 }
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: "#fff",
+                        font: { size: 14 }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: "#fff",
+                        font: { size: 16 }
+                    }
+                }
+            }
+        }
+    });
+});
+
+
+// სათაურის ცვლა
+const amounts = [
+    "🔥 $10 Every Day! 🔥",
+    "🚀 $20 Every Day! 🚀",
+    "💰 $30 Every Day! 💰"
+];
+
+let currentIndex = 0;
+const amountElement = document.getElementById("amountText");
+
+function updatePrizeText() {
+    amountElement.innerHTML = `<span class="highlight">${amounts[currentIndex]}</span>`;
+    currentIndex = (currentIndex + 4) % amounts.length; // ციკლურად გადადის შემდეგზე
+}
+
+setInterval(updatePrizeText, 6000); // ყოველ 6 წამში იცვლება
+updatePrizeText(); // რომ პირველივე ჩატვირთვისას გამოჩნდეს
